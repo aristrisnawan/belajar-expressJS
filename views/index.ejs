@@ -1,0 +1,11 @@
+<h1>Ini halaman index</h1>
+<h2>Halo <%= nama %></h2>
+<h4>Daftar Mahasiswa</h4>
+<% if (mhs.length < 1) { %>
+<p>Data Mahasiswa masih kosong</p>
+<% } %> <% mhs.forEach(mahasiswa => { %>
+<ul>
+  <li>Nama : <%= mahasiswa.nama %></li>
+  <li>Email : <%= mahasiswa.email %></li>
+</ul>
+<% }) %>

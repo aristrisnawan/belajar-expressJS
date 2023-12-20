@@ -1,21 +1,45 @@
 const express = require('express')
 const app = express()
 const port = 3000
-
+var expressLayouts = require('express-ejs-layouts');
+// gunakan ejs
+app.set('view engine','ejs')
+app.use(expressLayouts)
 app.get('/',(req,res) => {
-    // res.send('Hello world')
-    res.sendFile('./index.html',{root: __dirname})
+    const mhs = [
+        {
+            nama: 'asep',
+            email: 'asep@gmail.com'
+        },
+        {
+            nama: 'erik',
+            email: 'erik@gmail.com'
+        },
+        {
+            nama: 'dodi',
+            email: 'dodi@gmail.com'
+        },
+    ]
+    res.render('index',{
+        layout: 'layouts/main-layout',
+        nama:'aris tris', 
+        title: 'Halaman Home',
+        mhs
+    })
 })
 
 app.get('/contact',(req,res) => {
-    // res.send('Hello world contact')
-    res.sendFile('./contact.html',{root:__dirname})
+    res.render('contact', {
+        layout: 'layouts/main-layout',
+        title: 'Halaman Contact'
+    })
 })
 
 app.get('/about',(req,res) => {
-    // res.send('Hello world contact')
-    // res.json({nama:'aris',alamat:'babantar'})
-    res.sendFile('./about.html',{root:__dirname})
+    res.render('about',{
+        layout: 'layouts/main-layout',
+        title: 'Halaman About'
+    })
 })
 
 app.get('/product/:id', (req,res) => {
@@ -31,35 +55,3 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 })
 
-// const http = require('http')
-// const port = 3000
-// const fs = require('fs')
-
-// http
-// .createServer((req,res) => {
-//     const url = req.url
-//     console.log(url);
-//     res.writeHead(200, {
-//         'Content-Type': 'text/html'
-//     })
-//     if (url === '/about') {
-//         res.write('<h1>Ini About</h1>')
-//         res.end()
-//     }else if (url === '/contact') {
-//         res.write('<h1>Ini Contact</h1>')
-//         res.end()
-//     }else{
-//         fs.readFile('./index.html',(e,data) => {
-//             if (e) {
-//                 res.writeHead(404)
-//                 res.write('Error: File not found')
-//             }else {
-//                 res.write(data)
-//             }
-//             res.end()
-//         }) 
-//     }
-// })
-// .listen(port,() => {
-//     console.log(`Server is listening on port ${port}...`);
-// })
